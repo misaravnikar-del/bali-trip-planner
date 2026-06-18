@@ -741,12 +741,12 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 const CATEGORIES = [
-  { id: 'beach_bar',   label: 'Beach Bar',   emoji: '🥂', color: '#4a90c4', bg: '#e8f4fd' },
-  { id: 'klub',        label: 'Klub',        emoji: '🎊', color: '#7b849a', bg: '#f0f1f5' },
-  { id: 'hrana',       label: 'Hrana',       emoji: '🍕', color: '#d4845a', bg: '#fdf0e8' },
-  { id: 'aktivnost',   label: 'Aktivnost',   emoji: '🏄', color: '#5a9e73', bg: '#eaf7ef' },
-  { id: 'znamenitost', label: 'Znamenitost', emoji: '🖼️', color: '#c4a84f', bg: '#fdf8e1' },
-  { id: 'drugo',       label: 'Drugo',       emoji: '✨', color: '#9b72c8', bg: '#f5eeff' },
+  { id: 'beach_bar',   label: 'Beach Bar',   emoji: '🥂', color: '#4a90c4', bg: '#e8f4fd', pin: '#b8d9f5' },
+  { id: 'klub',        label: 'Klub',        emoji: '🎊', color: '#7b849a', bg: '#f0f1f5', pin: '#ced2de' },
+  { id: 'hrana',       label: 'Hrana',       emoji: '🍕', color: '#d4845a', bg: '#fdf0e8', pin: '#f5c9b0' },
+  { id: 'aktivnost',   label: 'Aktivnost',   emoji: '🏄', color: '#5a9e73', bg: '#eaf7ef', pin: '#a8ddb8' },
+  { id: 'znamenitost', label: 'Znamenitost', emoji: '🖼️', color: '#c4a84f', bg: '#fdf8e1', pin: '#f0dfa0' },
+  { id: 'drugo',       label: 'Drugo',       emoji: '✨', color: '#9b72c8', bg: '#f5eeff', pin: '#d4b8f0' },
 ];
 
 let customEmojiOverride = null;
@@ -778,7 +778,7 @@ function makeIcon(place) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="38" height="46" viewBox="0 0 38 46">
     <ellipse cx="19" cy="42" rx="9" ry="4" fill="rgba(0,0,0,0.15)"/>
     <path d="M19 1 C9 1 1 9 1 19 C1 32 19 45 19 45 C19 45 37 32 37 19 C37 9 29 1 19 1Z"
-      fill="${cat.color}" stroke="white" stroke-width="2"/>
+      fill="${cat.pin}" stroke="${cat.color}" stroke-width="2"/>
     <text x="19" y="25" text-anchor="middle" font-size="17">${emoji}</text>
   </svg>`;
   return L.divIcon({ html: svg, className: '', iconSize: [38, 46], iconAnchor: [19, 46], popupAnchor: [0, -48] });
