@@ -1052,6 +1052,16 @@ function renderTicketPreviews() {
 
 // ─── Modal ────────────────────────────────────────────────────────────────────
 function openModal(id = null) {
+  const username = document.getElementById('username').value.trim();
+  if (!username && !id) {
+    const el = document.getElementById('username');
+    el.focus();
+    el.style.borderColor = 'var(--danger)';
+    el.placeholder = 'Najprej vnesi ime!';
+    setTimeout(() => { el.style.borderColor = ''; el.placeholder = 'Tvoje ime...'; }, 2500);
+    showToast('Najprej vnesi svoje ime! 👆', 'error');
+    return;
+  }
   editingId = id; selectedCat = null; pendingImages = []; pendingTickets = [];
   coordsFromUrl = null; customEmojiOverride = null;
   ['fName','fDesc','fUrl','fPrice','fVisitDate','fWebsite'].forEach(k => { const el = document.getElementById(k); if (el) el.value = ''; });
