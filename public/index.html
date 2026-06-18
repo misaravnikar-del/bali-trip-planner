@@ -778,7 +778,7 @@ function makeIcon(place) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="38" height="46" viewBox="0 0 38 46">
     <ellipse cx="19" cy="42" rx="9" ry="4" fill="rgba(0,0,0,0.10)"/>
     <path d="M19 1 C9 1 1 9 1 19 C1 32 19 45 19 45 C19 45 37 32 37 19 C37 9 29 1 19 1Z"
-      fill="${cat.pin}" stroke="${cat.color}" stroke-width="2.5"/>
+      fill="${cat.pin}" stroke="${cat.pin}" stroke-width="1"/>
     <text x="19" y="25" text-anchor="middle" font-size="17">${emoji}</text>
   </svg>`;
   return L.divIcon({ html: svg, className: '', iconSize: [38, 46], iconAnchor: [19, 46], popupAnchor: [0, -48] });
