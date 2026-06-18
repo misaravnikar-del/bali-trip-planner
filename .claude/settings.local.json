@@ -45,7 +45,29 @@
       "Bash(git commit *)",
       "Bash(git branch *)",
       "Bash(git remote *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(curl -fsSL https://railway.app/install.sh)",
+      "Bash(curl -fsSL https://railway.app/install.sh -o /tmp/railway_install.sh)",
+      "Bash(bash /tmp/railway_install.sh)",
+      "Bash(railway --version)",
+      "Read(//Users/misaravnikar/.railway/**)",
+      "Read(//usr/local/bin/**)",
+      "Bash(~/.railway/bin/railway login *)",
+      "Bash(~/.railway/bin/railway whoami *)",
+      "Bash(~/.railway/bin/railway init *)",
+      "Bash(~/.railway/bin/railway link *)",
+      "Bash(~/.railway/bin/railway service *)",
+      "Bash(~/.railway/bin/railway up *)",
+      "Bash(~/.railway/bin/railway status *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://bali-trip-planner-production-71c9.up.railway.app)",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__find",
+      "mcp__Claude_in_Chrome__javascript_tool",
+      "Bash(curl -s -H 'Authorization: Bearer rnd_WeS6VxdE4ldLM0FkFNDDK2oPF5a7' https://api.render.com/v1/owners?limit=1)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d[0]['owner']['id'], d[0]['owner']['email']\\)\")",
+      "Bash(curl -s -X POST https://api.render.com/v1/services -H 'Authorization: Bearer rnd_WeS6VxdE4ldLM0FkFNDDK2oPF5a7' -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(python3 -c ' *)",
+      "Bash(curl -s -H 'Authorization: Bearer rnd_WeS6VxdE4ldLM0FkFNDDK2oPF5a7' https://api.render.com/v1/services/srv-d8prlgv7f7vs73d9lnkg/deploys?limit=1)"
     ]
   }
 }

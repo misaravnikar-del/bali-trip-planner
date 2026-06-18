@@ -741,19 +741,12 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 const CATEGORIES = [
-  { id: 'beach_bar',   label: 'Beach Bar',   emoji: '🥂', color: '#1d6fa5', bg: '#dceeff', customEmoji: false },
-  { id: 'klub',        label: 'Klub',        emoji: '🎊', color: '#374151', bg: '#e5e7eb', customEmoji: false },
-  { id: 'hrana',       label: 'Hrana',       emoji: '🍕', color: '#c2500a', bg: '#fde8d0', customEmoji: false },
-  { id: 'aktivnost',   label: 'Aktivnost',   emoji: '🏄', color: '#1a7c3e', bg: '#d4f5e0', customEmoji: true  },
-  { id: 'znamenitost', label: 'Znamenitost', emoji: '🖼️', color: '#9a6c00', bg: '#fef4c0', customEmoji: false },
-  { id: 'drugo',       label: 'Drugo',       emoji: '✨', color: '#7e22ce', bg: '#ede9fe', customEmoji: true  },
-];
-
-const EMOJI_PICKER_OPTIONS = [
-  '🏄','🤿','🧗','🚴','🧘','🏊','⛵','🎣','🛵','🏕️',
-  '🎭','🎨','🎬','🎤','🪘','🎲','🧩','🎯','🎳','🎠',
-  '✨','🌟','💫','🎁','🎀','🎉','🪄','🔮','🌈','🦋',
-  '🌺','🌸','🌊','🏔️','🌋','🗿','🗽','🏯','🕌','⛩️',
+  { id: 'beach_bar',   label: 'Beach Bar',   emoji: '🥂', color: '#4a90c4', bg: '#e8f4fd' },
+  { id: 'klub',        label: 'Klub',        emoji: '🎊', color: '#7b849a', bg: '#f0f1f5' },
+  { id: 'hrana',       label: 'Hrana',       emoji: '🍕', color: '#d4845a', bg: '#fdf0e8' },
+  { id: 'aktivnost',   label: 'Aktivnost',   emoji: '🏄', color: '#5a9e73', bg: '#eaf7ef' },
+  { id: 'znamenitost', label: 'Znamenitost', emoji: '🖼️', color: '#c4a84f', bg: '#fdf8e1' },
+  { id: 'drugo',       label: 'Drugo',       emoji: '✨', color: '#9b72c8', bg: '#f5eeff' },
 ];
 
 let customEmojiOverride = null;
@@ -953,10 +946,7 @@ function renderCatGrid() {
     </div>`;
   }).join('');
 
-  // Show emoji picker if aktivnost or drugo selected
-  const showPicker = selectedCat && getCat(selectedCat)?.customEmoji;
-  document.getElementById('emojiPickerWrap').classList.toggle('show', showPicker);
-  if (showPicker) renderEmojiPicker();
+  document.getElementById('emojiPickerWrap').classList.remove('show');
 }
 
 function renderEmojiPicker() {
