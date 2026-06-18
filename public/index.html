@@ -662,6 +662,11 @@
       <input class="form-input" type="text" id="fName" placeholder="npr. Potato Head Beach Club">
     </div>
 
+    <div class="form-group" id="fAddedByWrap" style="display:none">
+      <label class="form-label">Dodal/a</label>
+      <input class="form-input" type="text" id="fAddedBy" placeholder="Ime osebe..." maxlength="30">
+    </div>
+
     <div class="form-group">
       <label class="form-label">Kategorija *</label>
       <div class="categories-grid" id="catGrid"></div>
@@ -711,6 +716,7 @@
 
     <div class="form-group">
       <label class="form-label">🖼️ Slike</label>
+      <div class="preview-grid" id="existingImgs"></div>
       <div class="upload-area" id="uploadArea">
         <input type="file" id="fImages" multiple accept="image/*" onchange="previewImages()">
         <span>📷</span>
@@ -752,7 +758,7 @@ const CATEGORIES = [
 let customEmojiOverride = null;
 
 let places = [], markers = {}, activeFilter = 'all';
-let editingId = null, selectedCat = null, pendingImages = [], pendingTickets = [];
+let editingId = null, selectedCat = null, pendingImages = [], pendingTickets = [], existingImages = [];
 let coordsFromUrl = null;
 let selectedCurrency = 'Rp';
 const RP_PER_EUR = 17500;
@@ -1062,13 +1068,15 @@ function openModal(id = null) {
     showToast('Najprej vnesi svoje ime! 👆', 'error');
     return;
   }
-  editingId = id; selectedCat = null; pendingImages = []; pendingTickets = [];
+  editingId = id; selectedCat = null; pendingImages = []; pendingTickets = []; existingImages = [];
   coordsFromUrl = null; customEmojiOverride = null;
   ['fName','fDesc','fUrl','fPrice','fVisitDate','fWebsite'].forEach(k => { const el = document.getElementById(k); if (el) el.value = ''; });
   document.getElementById('coordsPreview').classList.remove('show');
   document.getElementById('previewImgs').innerHTML = '';
+  document.getElementById('existingImgs').innerHTML = '';
   document.getElementById('previewTickets').innerHTML = '';
   document.getElementById('convertHint').innerHTML = '';
+  document.getElementById('fAddedByWrap').style.display = id ? '' : 'none';
 
   if (id) {
     const p = places.find(x=>x.id===id);
@@ -1091,6 +1099,9 @@ function openModal(id = null) {
     const cat = getCat(p.category);
     if (cat?.customEmoji && p.custom_category) customEmojiOverride = p.custom_category;
     if (p.lat) { coordsFromUrl={lat:p.lat,lng:p.lng}; document.getElementById('coordsPreview').textContent=`📍 ${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}`; document.getElementById('coordsPreview').classList.add('show'); }
+    document.getElementById('fAddedBy').value = p.added_by || '';
+    existingImages = [...(p.images || [])];
+    renderExistingImages();
   } else {
     document.getElementById('modalTitle').textContent = '✚ Dodaj kraj';
     selectedCurrency = 'Rp';
@@ -1100,6 +1111,15 @@ function openModal(id = null) {
   renderCatGrid();
   document.getElementById('modalOverlay').classList.add('open');
   setTimeout(() => document.getElementById('fName').focus(), 100);
+}
+
+function renderExistingImages() {
+  document.getElementById('existingImgs').innerHTML = existingImages.map((src, i) =>
+    `<div class="preview-img-wrap">
+      <img src="${src}" class="preview-img">
+      <button class="preview-img-rm" onclick="existingImages.splice(${i},1);renderExistingImages()">×</button>
+    </div>`
+  ).join('');
 }
 
 function closeModal() {
@@ -1120,8 +1140,11 @@ async function submitPlace() {
   const price = priceNum ? `${selectedCurrency} ${priceNum}` : '';
   const visitDate = document.getElementById('fVisitDate').value;
   const website = document.getElementById('fWebsite').value.trim();
-  const username = document.getElementById('username').value.trim() || 'Anonimno';
+  const username = editingId
+    ? (document.getElementById('fAddedBy').value.trim() || document.getElementById('username').value.trim() || 'Anonimno')
+    : (document.getElementById('username').value.trim() || 'Anonimno');
 
+  if (!document.getElementById('username').value.trim()) { showToast('Najprej vnesi svoje ime! 👆', 'error'); document.getElementById('username').focus(); return; }
   if (!name) { showToast('Vnesi ime kraja!', 'error'); return; }
   if (!selectedCat) { showToast('Izberi kategorijo!', 'error'); return; }
 
@@ -1145,7 +1168,7 @@ async function submitPlace() {
 
     let place;
     if (editingId) {
-      const r = await fetch(`/api/places/${editingId}`, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
+      const r = await fetch(`/api/places/${editingId}`, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({...body, images: existingImages}) });
       if (!r.ok) throw new Error(await r.text());
       place = await r.json();
       removeMarker(editingId);

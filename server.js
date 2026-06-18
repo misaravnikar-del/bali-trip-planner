@@ -144,9 +144,9 @@ app.delete('/api/places/:id', (req, res) => {
 });
 
 app.put('/api/places/:id', (req, res) => {
-  const { name, category, description, maps_url, lat, lng, price, custom_category, visit_date, website } = req.body;
-  db.prepare(`UPDATE places SET name=?, category=?, description=?, maps_url=?, lat=?, lng=?, price=?, custom_category=?, visit_date=?, website=? WHERE id=?`)
-    .run(name, category, description, maps_url, lat, lng, price || '', custom_category || null, visit_date || null, website || '', req.params.id);
+  const { name, category, description, maps_url, lat, lng, price, custom_category, visit_date, website, added_by, images } = req.body;
+  db.prepare(`UPDATE places SET name=?, category=?, description=?, maps_url=?, lat=?, lng=?, price=?, custom_category=?, visit_date=?, website=?, added_by=?, images=? WHERE id=?`)
+    .run(name, category, description, maps_url, lat, lng, price || '', custom_category || null, visit_date || null, website || '', added_by || 'Anonimno', JSON.stringify(images || []), req.params.id);
   res.json(parsePlace(db.prepare('SELECT * FROM places WHERE id = ?').get(req.params.id)));
 });
 
