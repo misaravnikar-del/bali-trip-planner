@@ -1,6 +1,7 @@
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
-  const { url } = req.body;
+  const { url } = req.body || {};
+  if (!url) return res.json({});
 
   function extractCoords(u) {
     let m;
@@ -15,19 +16,42 @@ export default async function handler(req, res) {
     return null;
   }
 
-  async function resolveCoords(u) {
+  function extractName(u) {
     try {
-      let finalUrl = u;
-      for (let i = 0; i < 5; i++) {
-        const r = await fetch(finalUrl, { method: 'HEAD', redirect: 'manual' });
-        const loc = r.headers.get('location');
-        if (!loc) break;
-        finalUrl = loc.startsWith('http') ? loc : new URL(loc, finalUrl).href;
+      // /maps/place/Place+Name/ or /maps/place/Place%20Name/
+      const m = u.match(/\/maps\/place\/([^/@?]+)/);
+      if (m) {
+        return decodeURIComponent(m[1].replace(/\+/g, ' ')).trim();
       }
-      return extractCoords(finalUrl);
-    } catch { return null; }
+    } catch {}
+    return null;
   }
 
-  const coords = extractCoords(url || '') || await resolveCoords(url || '');
-  res.json(coords || {});
+  try {
+    // Follow redirects with GET to get final URL
+    const r = await fetch(url, {
+      method: 'GET',
+      redirect: 'follow',
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' },
+      signal: AbortSignal.timeout(8000),
+    });
+    const finalUrl = r.url;
+
+    const coords = extractCoords(finalUrl);
+    const name = extractName(finalUrl);
+
+    // If no coords in URL, try to extract from page HTML
+    if (!coords) {
+      const html = await r.text();
+      // Look for coords in page source
+      const cm = html.match(/"(-8\.\d+)","(115\.\d+)"/) || html.match(/center=(-?\d+\.\d+),(-?\d+\.\d+)/);
+      if (cm) {
+        return res.json({ lat: parseFloat(cm[1]), lng: parseFloat(cm[2]), name });
+      }
+    }
+
+    return res.json({ ...( coords || {}), name: name || null });
+  } catch (e) {
+    return res.json({});
+  }
 }

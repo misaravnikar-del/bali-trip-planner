@@ -2,3 +2,4 @@ node_modules/
 bali.db
 *.log
 .DS_Store
+.vercel

@@ -618,6 +618,9 @@ function parseUrl() {
     try {
       const r = await fetch('/api/resolve-url', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({url}) });
       const data = await r.json();
+      if (data.name && !document.getElementById('fName').value.trim()) {
+        document.getElementById('fName').value = data.name;
+      }
       if (data.lat && data.lng) {
         coordsFromUrl = { lat:data.lat, lng:data.lng };
         preview.textContent = `📍 Koordinate zaznane: ${data.lat.toFixed(5)}, ${data.lng.toFixed(5)}`;
