@@ -390,7 +390,7 @@ function makeIcon(place) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="38" height="46" viewBox="0 0 38 46">
     <ellipse cx="19" cy="42" rx="9" ry="4" fill="rgba(0,0,0,0.10)"/>
     <path d="M19 1 C9 1 1 9 1 19 C1 32 19 45 19 45 C19 45 37 32 37 19 C37 9 29 1 19 1Z"
-      fill="${cat.pin}" stroke="${cat.pin}" stroke-width="1"/>
+      fill="${cat.pin}" stroke="rgba(0,0,0,0.28)" stroke-width="1.5"/>
     <text x="19" y="25" text-anchor="middle" font-size="17">${emoji}</text>
   </svg>`;
   return L.divIcon({ html: svg, className: '', iconSize: [38, 46], iconAnchor: [19, 46], popupAnchor: [0, -48] });
@@ -845,15 +845,36 @@ async function fetchAll() {
   renderList();
 }
 
-function toggleDrawer() { document.getElementById('sidebar').classList.toggle('open'); }
+function toggleDrawer() {
+  const center = map.getCenter();
+  const zoom = map.getZoom();
+  document.getElementById('sidebar').classList.toggle('open');
+  setTimeout(() => { map.setView(center, zoom, { animate: false }); }, 50);
+}
 document.addEventListener('click', e => {
-  if (e.target.closest('.place-card') && window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+  if (e.target.closest('.place-card') && window.innerWidth <= 768) {
+    const center = map.getCenter();
+    const zoom = map.getZoom();
+    document.getElementById('sidebar').classList.remove('open');
+    setTimeout(() => { map.setView(center, zoom, { animate: false }); }, 50);
+  }
 });
 
+function saveName(name) {
+  localStorage.setItem('bali_username', name);
+  document.cookie = `bali_username=${encodeURIComponent(name)};max-age=${60*60*24*365};path=/;SameSite=Lax`;
+}
+function loadName() {
+  const ls = localStorage.getItem('bali_username');
+  if (ls) return ls;
+  const m = document.cookie.match(/(?:^|;\s*)bali_username=([^;]*)/);
+  return m ? decodeURIComponent(m[1]) : '';
+}
+
 async function init() {
-  const saved = localStorage.getItem('bali_username');
+  const saved = loadName();
   if (saved) document.getElementById('username').value = saved;
-  document.getElementById('username').addEventListener('input', e => localStorage.setItem('bali_username', e.target.value));
+  document.getElementById('username').addEventListener('input', e => saveName(e.target.value));
   renderFilters();
   await fetchAll();
   setInterval(fetchAll, 5000);
