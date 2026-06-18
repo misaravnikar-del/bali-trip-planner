@@ -25,198 +25,57 @@
     --muted: #7a7060;
     --danger: #c0392b;
     --danger-light: #fde8e6;
+    --heart: #e05a7a;
+    --heart-light: #fdeef2;
     --shadow: 0 1px 4px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.07);
   }
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
 
-  /* Header */
-  header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 0 20px;
-    height: 58px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1000;
-    flex-shrink: 0;
-    box-shadow: var(--shadow-sm);
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--text);
-    letter-spacing: -0.3px;
-  }
+  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 20px; height: 58px; display: flex; align-items: center; justify-content: space-between; z-index: 1000; flex-shrink: 0; box-shadow: var(--shadow-sm); }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text); letter-spacing: -0.3px; }
   .logo-dot { color: var(--accent); }
   .header-right { display: flex; align-items: center; gap: 10px; }
   .username-wrap { position: relative; }
-  .username-wrap::before {
-    content: '👤';
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 13px;
-  }
-  .username-input {
-    background: var(--surface2);
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    padding: 7px 12px 7px 30px;
-    color: var(--text);
-    font-size: 13px;
-    font-family: inherit;
-    width: 150px;
-    transition: border-color 0.15s;
-  }
+  .username-wrap::before { content: '👤'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 13px; }
+  .username-input { background: var(--surface2); border: 1.5px solid var(--border); border-radius: 8px; padding: 7px 12px 7px 30px; color: var(--text); font-size: 13px; font-family: inherit; width: 150px; transition: border-color 0.15s; }
   .username-input:focus { outline: none; border-color: var(--accent); background: #fff; }
-  .btn-add {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 18px;
-    font-weight: 600;
-    font-size: 13px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+  .btn-add { background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 8px 18px; font-weight: 600; font-size: 13px; cursor: pointer; font-family: inherit; transition: background 0.15s; display: flex; align-items: center; gap: 6px; }
   .btn-add:hover { background: var(--accent-dark); }
 
-  /* Layout */
   .main { display: flex; flex: 1; overflow: hidden; }
 
-  /* Sidebar */
-  .sidebar {
-    width: 340px;
-    background: var(--bg);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  .sidebar-header {
-    padding: 14px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-  }
+  .sidebar { width: 340px; background: var(--bg); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0; }
+  .sidebar-header { padding: 14px; background: var(--surface); border-bottom: 1px solid var(--border); }
   .search-wrap { position: relative; margin-bottom: 10px; }
   .search-wrap::before { content: '🔍'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 13px; }
-  .search-box {
-    background: var(--surface2);
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 12px 8px 32px;
-    color: var(--text);
-    font-size: 13px;
-    font-family: inherit;
-    width: 100%;
-    transition: border-color 0.15s;
-  }
+  .search-box { background: var(--surface2); border: 1.5px solid var(--border); border-radius: 8px; padding: 8px 12px 8px 32px; color: var(--text); font-size: 13px; font-family: inherit; width: 100%; transition: border-color 0.15s; }
   .search-box:focus { outline: none; border-color: var(--accent); background: #fff; }
   .search-box::placeholder { color: var(--muted); }
 
   .filters { display: flex; flex-wrap: wrap; gap: 5px; }
-  .filter-btn {
-    background: var(--surface2);
-    border: 1.5px solid var(--border);
-    border-radius: 20px;
-    padding: 4px 10px;
-    font-size: 11px;
-    cursor: pointer;
-    color: var(--muted);
-    font-family: inherit;
-    transition: all 0.15s;
-    font-weight: 500;
-    white-space: nowrap;
-  }
+  .filter-btn { background: var(--surface2); border: 1.5px solid var(--border); border-radius: 20px; padding: 4px 10px; font-size: 11px; cursor: pointer; color: var(--muted); font-family: inherit; transition: all 0.15s; font-weight: 500; white-space: nowrap; }
   .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
   .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
 
-  .places-list {
-    flex: 1;
-    overflow-y: auto;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+  .places-list { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
   .places-list::-webkit-scrollbar { width: 4px; }
   .places-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
 
-  .place-card {
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: 12px;
-    padding: 13px 14px;
-    cursor: pointer;
-    transition: all 0.15s;
-    box-shadow: var(--shadow-sm);
-  }
+  .place-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; padding: 13px 14px; cursor: pointer; transition: all 0.15s; box-shadow: var(--shadow-sm); }
   .place-card:hover { border-color: var(--accent); box-shadow: var(--shadow); transform: translateY(-1px); }
   .place-card.active { border-color: var(--accent); background: var(--accent-light); }
 
   .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
   .card-left { flex: 1; min-width: 0; }
-  .cat-badge {
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    margin-bottom: 5px;
-  }
+  .cat-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.6px; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 5px; }
   .card-name { font-weight: 600; font-size: 14px; line-height: 1.3; color: var(--text); }
   .card-desc { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
   .card-price { font-size: 12px; color: var(--amber); font-weight: 600; margin-top: 4px; }
-  .card-ticket-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 11px;
-    background: var(--amber-light);
-    color: var(--amber);
-    border-radius: 8px;
-    padding: 2px 8px;
-    margin-top: 4px;
-    font-weight: 500;
-  }
+  .card-ticket-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; background: var(--amber-light); color: var(--amber); border-radius: 8px; padding: 2px 8px; margin-top: 4px; font-weight: 500; }
   .card-actions { display: flex; gap: 5px; flex-shrink: 0; }
-  .btn-icon {
-    background: var(--surface2);
-    border: 1.5px solid var(--border);
-    border-radius: 7px;
-    padding: 5px 8px;
-    color: var(--muted);
-    cursor: pointer;
-    font-size: 12px;
-    transition: all 0.15s;
-    line-height: 1;
-  }
+  .btn-icon { background: var(--surface2); border: 1.5px solid var(--border); border-radius: 7px; padding: 5px 8px; color: var(--muted); cursor: pointer; font-size: 12px; transition: all 0.15s; line-height: 1; }
   .btn-icon:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
   .btn-icon.danger:hover { border-color: var(--danger); color: var(--danger); background: var(--danger-light); }
 
@@ -224,169 +83,64 @@
   .card-img { width: 52px; height: 42px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); }
   .card-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
   .card-author { font-size: 11px; color: var(--muted); }
-  .card-date { font-size: 11px; color: var(--border2); }
+
+  /* Hearts */
+  .card-hearts { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+  .btn-heart {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--surface2); border: 1.5px solid var(--border);
+    border-radius: 20px; padding: 4px 10px;
+    font-size: 12px; color: var(--muted);
+    cursor: pointer; font-family: inherit; font-weight: 500;
+    transition: all 0.15s;
+  }
+  .btn-heart:hover { border-color: var(--heart); color: var(--heart); background: var(--heart-light); }
+  .btn-heart.hearted { background: var(--heart-light); border-color: var(--heart); color: var(--heart); font-weight: 600; }
+  .heart-users { font-size: 11px; color: var(--muted); }
 
   .no-places { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 14px; }
   .no-places-emoji { font-size: 36px; margin-bottom: 10px; }
 
-  /* Map */
   #map { flex: 1; }
 
-  /* Modal */
-  .modal-overlay {
-    position: fixed; inset: 0;
-    background: rgba(28,26,23,0.45);
-    backdrop-filter: blur(3px);
-    z-index: 2000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-  }
+  .modal-overlay { position: fixed; inset: 0; background: rgba(28,26,23,0.45); backdrop-filter: blur(3px); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
   .modal-overlay.open { opacity: 1; pointer-events: all; }
-
-  .modal {
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: 18px;
-    width: 520px;
-    max-width: 95vw;
-    max-height: 92vh;
-    overflow-y: auto;
-    padding: 28px 28px 24px;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
-    transform: translateY(12px) scale(0.98);
-    transition: transform 0.2s;
-  }
+  .modal { background: var(--surface); border: 1.5px solid var(--border); border-radius: 18px; width: 520px; max-width: 95vw; max-height: 92vh; overflow-y: auto; padding: 28px 28px 24px; box-shadow: 0 8px 40px rgba(0,0,0,0.15); transform: translateY(12px) scale(0.98); transition: transform 0.2s; }
   .modal-overlay.open .modal { transform: translateY(0) scale(1); }
   .modal::-webkit-scrollbar { width: 4px; }
   .modal::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
-
   .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
   .modal-header h2 { font-size: 19px; font-weight: 700; letter-spacing: -0.3px; }
-  .modal-close {
-    background: var(--surface2);
-    border: 1.5px solid var(--border);
-    color: var(--muted);
-    border-radius: 8px;
-    width: 32px; height: 32px;
-    font-size: 18px;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.15s;
-    line-height: 1;
-  }
+  .modal-close { background: var(--surface2); border: 1.5px solid var(--border); color: var(--muted); border-radius: 8px; width: 32px; height: 32px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; line-height: 1; }
   .modal-close:hover { background: var(--danger-light); border-color: var(--danger); color: var(--danger); }
 
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .form-group { margin-bottom: 16px; }
-  .form-label {
-    display: block;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--muted);
-    margin-bottom: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-  }
-  .form-input, .form-textarea {
-    width: 100%;
-    background: var(--surface2);
-    border: 1.5px solid var(--border);
-    border-radius: 9px;
-    padding: 10px 12px;
-    color: var(--text);
-    font-size: 14px;
-    font-family: inherit;
-    transition: border-color 0.15s, background 0.15s;
-  }
-  .form-input:focus, .form-textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-    background: #fff;
-  }
+  .form-label { display: block; font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.6px; }
+  .form-input, .form-textarea { width: 100%; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 9px; padding: 10px 12px; color: var(--text); font-size: 14px; font-family: inherit; transition: border-color 0.15s, background 0.15s; }
+  .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--accent); background: #fff; }
   .form-input::placeholder, .form-textarea::placeholder { color: var(--border2); }
   .form-textarea { resize: vertical; min-height: 76px; }
 
   .price-wrap { display: flex; gap: 6px; align-items: center; }
   .price-wrap .form-input { flex: 1; }
-  .currency-toggle {
-    display: flex;
-    border: 1.5px solid var(--border);
-    border-radius: 9px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-  .currency-btn {
-    padding: 8px 11px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    background: var(--surface2);
-    color: var(--muted);
-    font-family: inherit;
-    transition: all 0.15s;
-  }
+  .currency-toggle { display: flex; border: 1.5px solid var(--border); border-radius: 9px; overflow: hidden; flex-shrink: 0; }
+  .currency-btn { padding: 8px 11px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; background: var(--surface2); color: var(--muted); font-family: inherit; transition: all 0.15s; }
   .currency-btn.active { background: var(--accent); color: #fff; }
-  .convert-hint {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 5px;
-    min-height: 16px;
-  }
+  .convert-hint { font-size: 11px; color: var(--muted); margin-top: 5px; min-height: 16px; }
   .convert-hint b { color: var(--accent); }
 
-  /* Categories */
   .categories-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
-  .cat-option {
-    background: var(--surface2);
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    padding: 9px 6px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.15s;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--muted);
-    line-height: 1.3;
-  }
+  .cat-option { background: var(--surface2); border: 2px solid var(--border); border-radius: 10px; padding: 9px 6px; text-align: center; cursor: pointer; transition: all 0.15s; font-size: 12px; font-weight: 500; color: var(--muted); line-height: 1.3; }
   .cat-option .cat-emoji { font-size: 18px; display: block; margin-bottom: 3px; }
   .cat-option:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
   .cat-option.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent-dark); font-weight: 600; }
 
-  .custom-cat-wrap { margin-top: 8px; display: none; }
-  .custom-cat-wrap.show { display: block; }
-
-  /* Maps input */
   .maps-hint { font-size: 11px; color: var(--muted); margin-top: 5px; }
-  .coords-preview {
-    background: #e8f5e9;
-    border: 1px solid #a5d6a7;
-    border-radius: 7px;
-    padding: 6px 10px;
-    font-size: 12px;
-    color: #2e7d32;
-    margin-top: 6px;
-    display: none;
-    font-weight: 500;
-  }
+  .coords-preview { background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 7px; padding: 6px 10px; font-size: 12px; color: #2e7d32; margin-top: 6px; display: none; font-weight: 500; }
   .coords-preview.show { display: block; }
 
-  /* Upload areas */
-  .upload-area {
-    border: 2px dashed var(--border2);
-    border-radius: 10px;
-    padding: 16px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.15s;
-    position: relative;
-    background: var(--surface2);
-  }
+  .upload-area { border: 2px dashed var(--border2); border-radius: 10px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.15s; position: relative; background: var(--surface2); }
   .upload-area:hover { border-color: var(--accent); background: var(--accent-light); }
   .upload-area input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
   .upload-area p { font-size: 12px; color: var(--muted); margin-top: 4px; }
@@ -395,71 +149,20 @@
   .preview-grid { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 8px; }
   .preview-img-wrap { position: relative; }
   .preview-img { width: 68px; height: 56px; object-fit: cover; border-radius: 7px; border: 1.5px solid var(--border); }
-  .preview-img-rm {
-    position: absolute; top: -5px; right: -5px;
-    background: var(--danger); color: white;
-    border: 2px solid white;
-    border-radius: 50%; width: 18px; height: 18px;
-    font-size: 9px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700;
-  }
+  .preview-img-rm { position: absolute; top: -5px; right: -5px; background: var(--danger); color: white; border: 2px solid white; border-radius: 50%; width: 18px; height: 18px; font-size: 9px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 700; }
 
   .ticket-list { display: flex; flex-direction: column; gap: 5px; margin-top: 8px; }
-  .ticket-item {
-    display: flex; align-items: center; gap: 8px;
-    background: var(--amber-light);
-    border: 1px solid #f0d080;
-    border-radius: 7px;
-    padding: 6px 10px;
-    font-size: 12px;
-    color: var(--amber);
-    font-weight: 500;
-  }
-  .ticket-item-rm {
-    margin-left: auto; background: none; border: none;
-    color: var(--amber); cursor: pointer; font-size: 14px; line-height: 1;
-  }
+  .ticket-item { display: flex; align-items: center; gap: 8px; background: var(--amber-light); border: 1px solid #f0d080; border-radius: 7px; padding: 6px 10px; font-size: 12px; color: var(--amber); font-weight: 500; }
+  .ticket-item-rm { margin-left: auto; background: none; border: none; color: var(--amber); cursor: pointer; font-size: 14px; line-height: 1; }
 
-  /* Form actions */
   .form-actions { display: flex; gap: 10px; margin-top: 20px; }
-  .btn-submit {
-    flex: 1;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 9px;
-    padding: 12px;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.15s;
-  }
+  .btn-submit { flex: 1; background: var(--accent); color: #fff; border: none; border-radius: 9px; padding: 12px; font-weight: 700; font-size: 14px; cursor: pointer; font-family: inherit; transition: background 0.15s; }
   .btn-submit:hover { background: var(--accent-dark); }
   .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
-  .btn-cancel {
-    background: var(--surface2);
-    border: 1.5px solid var(--border);
-    border-radius: 9px;
-    padding: 12px 20px;
-    color: var(--muted);
-    font-size: 14px;
-    cursor: pointer;
-    font-family: inherit;
-    font-weight: 500;
-    transition: all 0.15s;
-  }
+  .btn-cancel { background: var(--surface2); border: 1.5px solid var(--border); border-radius: 9px; padding: 12px 20px; color: var(--muted); font-size: 14px; cursor: pointer; font-family: inherit; font-weight: 500; transition: all 0.15s; }
   .btn-cancel:hover { border-color: var(--border2); color: var(--text); }
 
-  /* Leaflet popup override */
-  .leaflet-popup-content-wrapper {
-    background: #fff !important;
-    border: 1.5px solid var(--border) !important;
-    color: var(--text) !important;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important;
-  }
+  .leaflet-popup-content-wrapper { background: #fff !important; border: 1.5px solid var(--border) !important; color: var(--text) !important; border-radius: 12px !important; box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important; }
   .leaflet-popup-tip { background: #fff !important; }
   .popup-name { font-weight: 700; font-size: 14px; margin-bottom: 3px; }
   .popup-desc { font-size: 12px; color: var(--muted); margin-bottom: 6px; line-height: 1.4; }
@@ -471,150 +174,51 @@
   .popup-author { font-size: 11px; color: var(--border2); margin-top: 5px; }
   .popup-tickets { font-size: 12px; color: var(--amber); margin-top: 4px; font-weight: 500; }
 
-  /* Emoji picker */
   .emoji-picker-wrap { display: none; margin-top: 10px; }
   .emoji-picker-wrap.show { display: block; }
   .emoji-picker-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
   .emoji-grid { display: flex; flex-wrap: wrap; gap: 6px; }
-  .emoji-opt {
-    width: 38px; height: 38px; font-size: 20px;
-    background: var(--surface2); border: 1.5px solid var(--border);
-    border-radius: 8px; cursor: pointer; transition: all 0.12s;
-    display: flex; align-items: center; justify-content: center;
-  }
+  .emoji-opt { width: 38px; height: 38px; font-size: 20px; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.12s; display: flex; align-items: center; justify-content: center; }
   .emoji-opt:hover { border-color: var(--accent); transform: scale(1.1); }
   .emoji-opt.active { border-color: var(--accent); background: var(--accent-light); box-shadow: 0 0 0 2px var(--accent-light); }
 
-  /* ── Mobile ────────────────────────────────────────────────────────────── */
   @media (max-width: 768px) {
     header { padding: 0 14px; height: 52px; }
     .logo { font-size: 16px; }
     .username-input { width: 110px; font-size: 12px; padding: 6px 10px 6px 26px; }
     .btn-add { padding: 7px 13px; font-size: 12px; }
-
     .main { position: relative; }
-
-    /* Sidebar becomes bottom drawer */
-    .sidebar {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      width: 100%;
-      height: 70vh;
-      border-right: none;
-      border-top: 1.5px solid var(--border);
-      border-radius: 18px 18px 0 0;
-      box-shadow: 0 -4px 24px rgba(0,0,0,0.12);
-      z-index: 500;
-      transform: translateY(100%);
-      transition: transform 0.3s cubic-bezier(0.32,0.72,0,1);
-    }
+    .sidebar { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; height: 70vh; border-right: none; border-top: 1.5px solid var(--border); border-radius: 18px 18px 0 0; box-shadow: 0 -4px 24px rgba(0,0,0,0.12); z-index: 500; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.32,0.72,0,1); }
     .sidebar.open { transform: translateY(0); }
-
-    /* Drag handle */
-    .sidebar-handle {
-      width: 36px; height: 4px;
-      background: var(--border2);
-      border-radius: 2px;
-      margin: 10px auto 6px;
-      flex-shrink: 0;
-    }
-
-    /* Filters scroll horizontally */
+    .sidebar-handle { width: 36px; height: 4px; background: var(--border2); border-radius: 2px; margin: 10px auto 6px; flex-shrink: 0; }
     .filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
     .filters::-webkit-scrollbar { display: none; }
-
-    /* Map fills whole screen */
     #map { width: 100%; }
-
-    /* Floating buttons */
-    .fab-wrap {
-      position: fixed;
-      bottom: 20px; right: 16px;
-      display: flex; flex-direction: column; gap: 10px;
-      z-index: 600;
-    }
-    .fab {
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      font-size: 20px;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.2);
-      transition: transform 0.15s;
-    }
+    .fab-wrap { position: fixed; bottom: 20px; right: 16px; display: flex; flex-direction: column; gap: 10px; z-index: 600; }
+    .fab { width: 52px; height: 52px; border-radius: 50%; border: none; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 12px rgba(0,0,0,0.2); transition: transform 0.15s; }
     .fab:active { transform: scale(0.93); }
     .fab-list { background: var(--surface); color: var(--text); }
     .fab-add  { background: var(--accent); color: #fff; }
-
-    /* Hide desktop add button on mobile */
     .btn-add { display: none; }
-
-    /* Modal slides up from bottom */
     .modal-overlay { align-items: flex-end; }
-    .modal {
-      width: 100%;
-      max-width: 100%;
-      max-height: 95vh;
-      border-radius: 20px 20px 0 0;
-      border-bottom: none;
-      padding: 20px 18px 28px;
-      transform: translateY(100%);
-      transition: transform 0.3s cubic-bezier(0.32,0.72,0,1);
-    }
+    .modal { width: 100%; max-width: 100%; max-height: 95vh; border-radius: 20px 20px 0 0; border-bottom: none; padding: 20px 18px 28px; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.32,0.72,0,1); }
     .modal-overlay.open .modal { transform: translateY(0); }
-
-    /* Two-col form rows stack */
     .form-row { grid-template-columns: 1fr; gap: 0; }
-
-    /* Categories 2-col on mobile */
     .categories-grid { grid-template-columns: repeat(2, 1fr); }
-
-    /* Bigger touch targets */
     .btn-icon { padding: 8px 11px; font-size: 14px; }
     .filter-btn { padding: 6px 12px; font-size: 12px; }
-
-    /* Toast above FABs */
     .toast { bottom: 82px; }
   }
 
-  /* Toast */
-  .toast {
-    position: fixed; bottom: 22px; left: 50%;
-    transform: translateX(-50%) translateY(80px);
-    background: var(--surface);
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    padding: 11px 20px;
-    font-size: 13px;
-    font-weight: 500;
-    z-index: 9999;
-    transition: transform 0.3s;
-    white-space: nowrap;
-    box-shadow: var(--shadow);
-  }
+  .toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px; padding: 11px 20px; font-size: 13px; font-weight: 500; z-index: 9999; transition: transform 0.3s; white-space: nowrap; box-shadow: var(--shadow); }
   .toast.show { transform: translateX(-50%) translateY(0); }
   .toast.success { border-color: var(--accent); color: var(--accent); }
   .toast.error { border-color: var(--danger); color: var(--danger); }
 
-  .spinner {
-    width: 14px; height: 14px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.6s linear infinite;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 6px;
-  }
+  .spinner { width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; display: inline-block; vertical-align: middle; margin-right: 6px; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
   .divider { height: 1px; background: var(--border); margin: 18px 0; }
-  .section-label {
-    font-size: 11px; font-weight: 700; color: var(--muted);
-    text-transform: uppercase; letter-spacing: 0.6px;
-    margin-bottom: 10px;
-  }
 </style>
 </head>
 <body>
@@ -630,7 +234,6 @@
 </header>
 
 <div class="main">
-  <!-- Mobile FABs -->
   <div class="fab-wrap">
     <button class="fab fab-add" onclick="openModal()" title="Dodaj kraj">+</button>
     <button class="fab fab-list" onclick="toggleDrawer()" title="Seznam">☰</button>
@@ -649,7 +252,6 @@
   <div id="map"></div>
 </div>
 
-<!-- Modal -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalIfOutside(event)">
   <div class="modal">
     <div class="modal-header">
@@ -687,8 +289,8 @@
         <div class="price-wrap">
           <input class="form-input" type="number" id="fPrice" placeholder="0" min="0" oninput="updateConvertHint()">
           <div class="currency-toggle">
-            <button class="currency-btn" id="btnRp" onclick="setCurrency('Rp')">Rp</button>
-            <button class="currency-btn active" id="btnEur" onclick="setCurrency('€')">€</button>
+            <button class="currency-btn active" id="btnRp" onclick="setCurrency('Rp')">Rp</button>
+            <button class="currency-btn" id="btnEur" onclick="setCurrency('€')">€</button>
           </div>
         </div>
         <div class="convert-hint" id="convertHint"></div>
@@ -717,7 +319,7 @@
     <div class="form-group">
       <label class="form-label">🖼️ Slike</label>
       <div class="preview-grid" id="existingImgs"></div>
-      <div class="upload-area" id="uploadArea">
+      <div class="upload-area">
         <input type="file" id="fImages" multiple accept="image/*" onchange="previewImages()">
         <span>📷</span>
         <p>Klikni ali povleci slike sem (jpg, png...)</p>
@@ -745,7 +347,12 @@
 <div class="toast" id="toast"></div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
+const SUPABASE_URL = 'https://bwwdftxddzadowetccgu.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3d2RmdHhkZHphZG93ZXRjY2d1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3ODQzMzYsImV4cCI6MjA5NzM2MDMzNn0.V7r8vXmBLy6dw_io1MEZvPuxHk3qWzKWBN42GC-YsMA';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 const CATEGORIES = [
   { id: 'beach_bar',   label: 'Beach Bar',   emoji: '🥂', color: '#5aaed4', bg: '#ceeef8', pin: '#ceeef8' },
   { id: 'klub',        label: 'Klub',        emoji: '🎊', color: '#9b8ac4', bg: '#d0c3f0', pin: '#d0c3f0' },
@@ -755,24 +362,23 @@ const CATEGORIES = [
   { id: 'drugo',       label: 'Drugo',       emoji: '✨', color: '#e080b8', bg: '#ffd7ee', pin: '#ffd7ee' },
 ];
 
-let customEmojiOverride = null;
+const EMOJI_PICKER_OPTIONS = ['🏄','🤿','🧘','🚴','🥾','🎭','🎪','🛕','🏯','🗿','🎡','🌋','🏖️','🌊','🐬','🦅','🌺','🌴','🍜','🍣','🍹','🎶','🎸','🎤','💆','🛶','🏊'];
 
 let places = [], markers = {}, activeFilter = 'all';
+let heartsData = {}; // { place_id: string[] }
 let editingId = null, selectedCat = null, pendingImages = [], pendingTickets = [], existingImages = [];
-let coordsFromUrl = null;
+let coordsFromUrl = null, customEmojiOverride = null;
 let selectedCurrency = 'Rp';
 const RP_PER_EUR = 17500;
 
-// ─── Map ─────────────────────────────────────────────────────────────────────
+// ─── Map ──────────────────────────────────────────────────────────────────────
 const map = L.map('map', { zoomControl: false }).setView([-8.4095, 115.1889], 10);
 L.control.zoom({ position: 'topright' }).addTo(map);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-  attribution: '© OpenStreetMap, © CARTO',
-  subdomains: 'abcd', maxZoom: 19
+  attribution: '© OpenStreetMap, © CARTO', subdomains: 'abcd', maxZoom: 19
 }).addTo(map);
 
 function getCat(id) { return CATEGORIES.find(c => c.id === id) || CATEGORIES[CATEGORIES.length - 1]; }
-// Returns the emoji to show for a place (custom override stored in custom_category for aktivnost/drugo)
 function placeEmoji(p) {
   const cat = getCat(p.category);
   return (cat.customEmoji && p.custom_category) ? p.custom_category : cat.emoji;
@@ -793,24 +399,23 @@ function makeIcon(place) {
 function addMarker(place) {
   if (!place.lat || !place.lng) return;
   const cat = getCat(place.category);
-  const imgsHtml = place.images.length
+  const imgsHtml = (place.images||[]).length
     ? `<div class="popup-imgs">${place.images.slice(0,3).map(i=>`<img class="popup-img" src="${i}">`).join('')}</div>`
     : '';
-  const ticketsHtml = place.tickets?.length
-    ? `<div class="popup-tickets">🎟️ ${place.tickets.length} kart${place.tickets.length > 1 ? 'e' : 'a'} naložen${place.tickets.length > 1 ? 'i' : 'a'}</div>`
+  const ticketsHtml = (place.tickets||[]).length
+    ? `<div class="popup-tickets">🎟️ ${place.tickets.length} kart${place.tickets.length>1?'e':'a'} naložen${place.tickets.length>1?'i':'a'}</div>`
     : '';
   const popup = `<div>
     <span class="cat-badge" style="background:${cat.bg};color:${cat.color};font-size:10px;padding:2px 7px;border-radius:8px;font-weight:700;text-transform:uppercase;display:inline-block;margin-bottom:4px">${placeEmoji(place)} ${cat.label}</span>
     <div class="popup-name">${place.name}</div>
-    ${place.description ? `<div class="popup-desc">${place.description}</div>` : ''}
-    ${place.price ? `<div class="popup-price">💶 ${place.price}</div>` : ''}
+    ${place.description?`<div class="popup-desc">${place.description}</div>`:''}
+    ${place.price?`<div class="popup-price">💶 ${place.price}</div>`:''}
     ${imgsHtml}${ticketsHtml}
-    ${place.visit_date ? `<div style="font-size:12px;color:var(--accent);font-weight:500;margin-bottom:5px">📅 ${new Date(place.visit_date).toLocaleDateString('sl-SI',{day:'numeric',month:'long',year:'numeric'})}</div>` : ''}
-    ${place.maps_url ? `<a class="popup-link" href="${place.maps_url}" target="_blank">📍 Google Maps</a>` : ''}
-    ${place.website ? `${place.maps_url?' · ':''}<a class="popup-link" href="${place.website}" target="_blank">🔗 Spletna stran</a>` : ''}
-    <div class="popup-author">Dodal/a: ${place.added_by || 'Anonimno'}</div>
+    ${place.visit_date?`<div style="font-size:12px;color:var(--accent);font-weight:500;margin-bottom:5px">📅 ${new Date(place.visit_date).toLocaleDateString('sl-SI',{day:'numeric',month:'long',year:'numeric'})}</div>`:''}
+    ${place.maps_url?`<a class="popup-link" href="${place.maps_url}" target="_blank">📍 Google Maps</a>`:''}
+    ${place.website?`${place.maps_url?' · ':''}<a class="popup-link" href="${place.website}" target="_blank">🔗 Spletna stran</a>`:''}
+    <div class="popup-author">Dodal/a: ${place.added_by||'Anonimno'}</div>
   </div>`;
-
   const m = L.marker([place.lat, place.lng], { icon: makeIcon(place) })
     .addTo(map).bindPopup(popup, { maxWidth: 260 });
   m.on('click', () => highlightCard(place.id));
@@ -821,12 +426,42 @@ function removeMarker(id) {
   if (markers[id]) { map.removeLayer(markers[id]); delete markers[id]; }
 }
 
-// ─── Filters ─────────────────────────────────────────────────────────────────
+// ─── Hearts ───────────────────────────────────────────────────────────────────
+async function toggleHeart(e, placeId) {
+  e.stopPropagation();
+  const username = document.getElementById('username').value.trim();
+  if (!username) { showToast('Najprej vnesi svoje ime! 👆', 'error'); document.getElementById('username').focus(); return; }
+
+  const users = heartsData[placeId] || [];
+  const alreadyHearted = users.includes(username);
+
+  if (alreadyHearted) {
+    await sb.from('hearts').delete().eq('place_id', placeId).eq('username', username);
+    heartsData[placeId] = users.filter(u => u !== username);
+  } else {
+    await sb.from('hearts').insert({ place_id: placeId, username });
+    heartsData[placeId] = [...users, username];
+  }
+  renderList();
+}
+
+function heartsBadge(placeId) {
+  const users = heartsData[placeId] || [];
+  const username = document.getElementById('username').value.trim();
+  const hearted = users.includes(username);
+  const count = users.length;
+  const others = users.filter(u => u !== username);
+  const label = hearted ? [username, ...others].join(', ') : users.join(', ');
+  return `<button class="btn-heart ${hearted?'hearted':''}" onclick="toggleHeart(event,'${placeId}')">
+    ${hearted?'❤️':'🤍'} ${count > 0 ? count : ''}
+  </button>${count > 0 ? `<span class="heart-users">${label}</span>` : ''}`;
+}
+
+// ─── Filters ──────────────────────────────────────────────────────────────────
 function renderFilters() {
-  const el = document.getElementById('filters');
-  const all = [{ id: 'all', label: 'Vse', emoji: '🗺️' }, ...CATEGORIES.filter(c => c.id !== '__custom__')];
-  el.innerHTML = all.map(c =>
-    `<button class="filter-btn ${activeFilter === c.id ? 'active' : ''}" onclick="setFilter('${c.id}')">${c.emoji} ${c.label}</button>`
+  const all = [{ id: 'all', label: 'Vse', emoji: '🗺️' }, ...CATEGORIES];
+  document.getElementById('filters').innerHTML = all.map(c =>
+    `<button class="filter-btn ${activeFilter===c.id?'active':''}" onclick="setFilter('${c.id}')">${c.emoji} ${c.label}</button>`
   ).join('');
 }
 
@@ -837,8 +472,7 @@ function setFilter(f) {
   places.forEach(p => {
     const m = markers[p.id];
     if (!m) return;
-    const visible = f === 'all' || p.category === f;
-    if (visible) map.addLayer(m); else map.removeLayer(m);
+    if (f === 'all' || p.category === f) map.addLayer(m); else map.removeLayer(m);
   });
 }
 
@@ -859,30 +493,30 @@ function renderList() {
 
   el.innerHTML = filtered.map(p => {
     const cat = getCat(p.category);
-    const catLabel = p.category === '__custom__' ? (p.custom_category || 'Po meri') : cat.label;
-    const imgs = p.images.slice(0,3).map(i=>`<img class="card-img" src="${i}">`).join('');
-    const hasTickets = p.tickets?.length > 0;
+    const imgs = (p.images||[]).slice(0,3).map(i=>`<img class="card-img" src="${i}">`).join('');
+    const hasTickets = (p.tickets||[]).length > 0;
     return `<div class="place-card" id="card-${p.id}" onclick="focusPlace('${p.id}')">
       <div class="card-top">
         <div class="card-left">
-          <span class="cat-badge" style="background:${cat.bg};color:${cat.color}">${placeEmoji(p)} ${catLabel}</span>
+          <span class="cat-badge" style="background:${cat.bg};color:${cat.color}">${placeEmoji(p)} ${cat.label}</span>
           <div class="card-name">${p.name}</div>
-          ${p.description ? `<div class="card-desc">${p.description.slice(0,90)}${p.description.length>90?'…':''}</div>` : ''}
-          ${p.price ? `<div class="card-price">💶 ${p.price}</div>` : ''}
-          ${p.visit_date ? `<div style="font-size:12px;color:var(--accent);margin-top:3px;font-weight:500">📅 ${new Date(p.visit_date).toLocaleDateString('sl-SI',{day:'numeric',month:'long',year:'numeric'})}</div>` : ''}
-          ${hasTickets ? `<span class="card-ticket-badge">🎟️ ${p.tickets.length} kart${p.tickets.length>1?'e':'a'}</span>` : ''}
+          ${p.description?`<div class="card-desc">${p.description.slice(0,90)}${p.description.length>90?'…':''}</div>`:''}
+          ${p.price?`<div class="card-price">💶 ${p.price}</div>`:''}
+          ${p.visit_date?`<div style="font-size:12px;color:var(--accent);margin-top:3px;font-weight:500">📅 ${new Date(p.visit_date).toLocaleDateString('sl-SI',{day:'numeric',month:'long',year:'numeric'})}</div>`:''}
+          ${hasTickets?`<span class="card-ticket-badge">🎟️ ${p.tickets.length} kart${p.tickets.length>1?'e':'a'}</span>`:''}
         </div>
         <div class="card-actions">
-          ${p.maps_url ? `<a href="${p.maps_url}" target="_blank" class="btn-icon" onclick="event.stopPropagation()" title="Google Maps">📍</a>` : ''}
+          ${p.maps_url?`<a href="${p.maps_url}" target="_blank" class="btn-icon" onclick="event.stopPropagation()" title="Google Maps">📍</a>`:''}
           <button class="btn-icon" onclick="event.stopPropagation();openModal('${p.id}')" title="Uredi">✏️</button>
           <button class="btn-icon danger" onclick="event.stopPropagation();deletePlace('${p.id}')" title="Izbriši">🗑</button>
         </div>
       </div>
-      ${imgs ? `<div class="card-images">${imgs}</div>` : ''}
+      ${imgs?`<div class="card-images">${imgs}</div>`:''}
       <div class="card-meta">
         <span class="card-author">👤 ${p.added_by||'Anonimno'}</span>
-        ${p.website ? `<a href="${p.website}" target="_blank" onclick="event.stopPropagation()" style="font-size:11px;color:var(--accent);text-decoration:none;font-weight:500">🔗 Spletna stran</a>` : ''}
+        ${p.website?`<a href="${p.website}" target="_blank" onclick="event.stopPropagation()" style="font-size:11px;color:var(--accent);text-decoration:none;font-weight:500">🔗 Spletna stran</a>`:''}
       </div>
+      <div class="card-hearts">${heartsBadge(p.id)}</div>
     </div>`;
   }).join('');
 }
@@ -891,10 +525,7 @@ function focusPlace(id) {
   const p = places.find(x=>x.id===id);
   if (!p) return;
   highlightCard(id);
-  if (p.lat && p.lng) {
-    map.flyTo([p.lat, p.lng], 15, { duration: 0.8 });
-    setTimeout(() => markers[id]?.openPopup(), 900);
-  }
+  if (p.lat && p.lng) { map.flyTo([p.lat, p.lng], 15, { duration: 0.8 }); setTimeout(() => markers[id]?.openPopup(), 900); }
 }
 
 function highlightCard(id) {
@@ -903,15 +534,12 @@ function highlightCard(id) {
   document.getElementById('card-'+id)?.scrollIntoView({ block:'nearest', behavior:'smooth' });
 }
 
-// ─── Currency ────────────────────────────────────────────────────────────────
+// ─── Currency ─────────────────────────────────────────────────────────────────
 function setCurrency(cur) {
   const amount = parseFloat(document.getElementById('fPrice').value);
   if (!isNaN(amount) && amount > 0) {
-    if (cur === 'Rp' && selectedCurrency === '€') {
-      document.getElementById('fPrice').value = Math.round(amount * RP_PER_EUR);
-    } else if (cur === '€' && selectedCurrency === 'Rp') {
-      document.getElementById('fPrice').value = (amount / RP_PER_EUR).toFixed(2);
-    }
+    if (cur === 'Rp' && selectedCurrency === '€') document.getElementById('fPrice').value = Math.round(amount * RP_PER_EUR);
+    else if (cur === '€' && selectedCurrency === 'Rp') document.getElementById('fPrice').value = (amount / RP_PER_EUR).toFixed(2);
   }
   selectedCurrency = cur;
   document.getElementById('btnRp').classList.toggle('active', cur === 'Rp');
@@ -923,40 +551,25 @@ function updateConvertHint() {
   const hint = document.getElementById('convertHint');
   const amount = parseFloat(document.getElementById('fPrice').value);
   if (isNaN(amount) || amount <= 0) { hint.innerHTML = ''; return; }
-  if (selectedCurrency === 'Rp') {
-    const eur = (amount / RP_PER_EUR).toFixed(2);
-    hint.innerHTML = `≈ <b>€${eur}</b> <span style="color:var(--border2)">(1€ = ${RP_PER_EUR.toLocaleString()} Rp)</span>`;
-  } else {
-    const rp = Math.round(amount * RP_PER_EUR).toLocaleString();
-    hint.innerHTML = `≈ <b>Rp ${rp}</b> <span style="color:var(--border2)">(1€ = ${RP_PER_EUR.toLocaleString()} Rp)</span>`;
-  }
-}
-
-function formatPrice(priceStr) {
-  if (!priceStr) return '';
-  // priceStr is stored as "Rp 50000" or "€ 15"
-  return priceStr;
+  if (selectedCurrency === 'Rp') hint.innerHTML = `≈ <b>€${(amount/RP_PER_EUR).toFixed(2)}</b>`;
+  else hint.innerHTML = `≈ <b>Rp ${Math.round(amount*RP_PER_EUR).toLocaleString()}</b>`;
 }
 
 // ─── Cat grid ─────────────────────────────────────────────────────────────────
 function renderCatGrid() {
-  const cat = selectedCat ? getCat(selectedCat) : null;
-  const displayEmoji = cat ? (customEmojiOverride || cat.emoji) : null;
-
   document.getElementById('catGrid').innerHTML = CATEGORIES.map(c => {
     const isSelected = selectedCat === c.id;
     const emoji = (isSelected && customEmojiOverride) ? customEmojiOverride : c.emoji;
-    return `<div class="cat-option ${isSelected ? 'selected' : ''}" onclick="selectCat('${c.id}')"
-      style="${isSelected ? `border-color:${c.color};background:${c.bg};` : ''}">
+    return `<div class="cat-option ${isSelected?'selected':''}" onclick="selectCat('${c.id}')"
+      style="${isSelected?`border-color:${c.color};background:${c.bg};`:''}">
       <span class="cat-emoji">${emoji}</span>${c.label}
     </div>`;
   }).join('');
-
   document.getElementById('emojiPickerWrap').classList.remove('show');
 }
 
 function renderEmojiPicker() {
-  document.getElementById('emojiGrid').innerHTML = EMOJI_PICKER_OPTIONS.map((e, i) =>
+  document.getElementById('emojiGrid').innerHTML = EMOJI_PICKER_OPTIONS.map((e,i) =>
     `<button class="emoji-opt ${customEmojiOverride===e?'active':''}" data-ei="${i}">${e}</button>`
   ).join('');
 }
@@ -964,8 +577,7 @@ function renderEmojiPicker() {
 document.addEventListener('click', e => {
   const btn = e.target.closest('.emoji-opt');
   if (!btn) return;
-  const i = parseInt(btn.dataset.ei);
-  customEmojiOverride = EMOJI_PICKER_OPTIONS[i];
+  customEmojiOverride = EMOJI_PICKER_OPTIONS[parseInt(btn.dataset.ei)];
   renderCatGrid();
 });
 
@@ -977,55 +589,54 @@ function selectCat(id) {
 
 // ─── URL parser ───────────────────────────────────────────────────────────────
 let resolveTimer = null;
-
 function parseUrl() {
   const url = document.getElementById('fUrl').value.trim();
   const preview = document.getElementById('coordsPreview');
   coordsFromUrl = null;
   if (!url) { preview.classList.remove('show'); return; }
 
-  // Try client-side first — !3d!4d is the actual pin, @ is just map view center
   let lat = null, lng = null, m;
   m = url.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
-  if (m) { lat = parseFloat(m[1]); lng = parseFloat(m[2]); }
-  if (!lat) { m = url.match(/[?&]q=(-?\d+\.\d+),(-?\d+\.\d+)/); if(m){lat=parseFloat(m[1]);lng=parseFloat(m[2]);} }
-  if (!lat) { m = url.match(/[?&]ll=(-?\d+\.\d+),(-?\d+\.\d+)/); if(m){lat=parseFloat(m[1]);lng=parseFloat(m[2]);} }
-  if (!lat) { m = url.match(/@(-?\d+\.\d+),(-?\d+\.\d+),\d+/); if(m){lat=parseFloat(m[1]);lng=parseFloat(m[2]);} }
+  if (m) { lat=parseFloat(m[1]); lng=parseFloat(m[2]); }
+  if (!lat) { m=url.match(/[?&]q=(-?\d+\.\d+),(-?\d+\.\d+)/); if(m){lat=parseFloat(m[1]);lng=parseFloat(m[2]);} }
+  if (!lat) { m=url.match(/[?&]ll=(-?\d+\.\d+),(-?\d+\.\d+)/); if(m){lat=parseFloat(m[1]);lng=parseFloat(m[2]);} }
+  if (!lat) { m=url.match(/@(-?\d+\.\d+),(-?\d+\.\d+),\d+/); if(m){lat=parseFloat(m[1]);lng=parseFloat(m[2]);} }
 
   if (lat && lng) {
     coordsFromUrl = { lat, lng };
     preview.textContent = `📍 Koordinate zaznane: ${lat.toFixed(5)}, ${lng.toFixed(5)}`;
-    preview.style.background = '#e8f5e9'; preview.style.color = '#2e7d32'; preview.style.borderColor = '#a5d6a7';
+    preview.style.cssText='background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7';
     preview.classList.add('show');
     return;
   }
 
-  // Shortened URL — resolve server-side
   preview.textContent = '⏳ Razrešujem povezavo...';
-  preview.style.background = '#fff8e1'; preview.style.color = '#f57f17'; preview.style.borderColor = '#ffe082';
+  preview.style.cssText='background:#fff8e1;color:#f57f17;border-color:#ffe082';
   preview.classList.add('show');
-
   clearTimeout(resolveTimer);
   resolveTimer = setTimeout(async () => {
     try {
-      const r = await fetch('/api/resolve-url', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url })
-      });
+      const r = await fetch('/api/resolve-url', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({url}) });
       const data = await r.json();
       if (data.lat && data.lng) {
-        coordsFromUrl = { lat: data.lat, lng: data.lng };
+        coordsFromUrl = { lat:data.lat, lng:data.lng };
         preview.textContent = `📍 Koordinate zaznane: ${data.lat.toFixed(5)}, ${data.lng.toFixed(5)}`;
-        preview.style.background = '#e8f5e9'; preview.style.color = '#2e7d32'; preview.style.borderColor = '#a5d6a7';
+        preview.style.cssText='background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7';
       } else {
-        preview.textContent = '⚠️ Koordinat ni bilo mogoče zaznati — kraj ne bo na karti.';
-        preview.style.background = '#fff3e0'; preview.style.color = '#e65100'; preview.style.borderColor = '#ffcc02';
+        preview.textContent = '⚠️ Koordinat ni bilo mogoče zaznati.';
+        preview.style.cssText='background:#fff3e0;color:#e65100;border-color:#ffcc02';
       }
-    } catch {
-      preview.textContent = '⚠️ Napaka pri razreševanju povezave.';
-    }
+    } catch { preview.textContent = '⚠️ Napaka pri razreševanju.'; }
   }, 600);
+}
+
+// ─── Image upload to Supabase Storage ────────────────────────────────────────
+async function uploadFile(file) {
+  const ext = file.name.split('.').pop().toLowerCase();
+  const path = `${crypto.randomUUID()}.${ext}`;
+  const { error } = await sb.storage.from('uploads').upload(path, file, { cacheControl: '3600', upsert: false });
+  if (error) throw new Error(error.message);
+  return sb.storage.from('uploads').getPublicUrl(path).data.publicUrl;
 }
 
 // ─── Image preview ────────────────────────────────────────────────────────────
@@ -1034,25 +645,26 @@ function previewImages() {
   document.getElementById('fImages').value = '';
   renderImagePreviews();
 }
-
 function renderImagePreviews() {
   document.getElementById('previewImgs').innerHTML = pendingImages.map((f,i) =>
-    `<div class="preview-img-wrap">
-      <img class="preview-img" src="${URL.createObjectURL(f)}">
-      <button class="preview-img-rm" onclick="pendingImages.splice(${i},1);renderImagePreviews()">×</button>
-    </div>`
+    `<div class="preview-img-wrap"><img class="preview-img" src="${URL.createObjectURL(f)}">
+    <button class="preview-img-rm" onclick="pendingImages.splice(${i},1);renderImagePreviews()">×</button></div>`
   ).join('');
 }
-
 function previewTickets() {
   pendingTickets = [...pendingTickets, ...Array.from(document.getElementById('fTickets').files)];
   document.getElementById('fTickets').value = '';
   renderTicketPreviews();
 }
-
 function renderTicketPreviews() {
   document.getElementById('previewTickets').innerHTML = pendingTickets.map((f,i) =>
     `<div class="ticket-item">🎫 ${f.name}<button class="ticket-item-rm" onclick="pendingTickets.splice(${i},1);renderTicketPreviews()">×</button></div>`
+  ).join('');
+}
+function renderExistingImages() {
+  document.getElementById('existingImgs').innerHTML = existingImages.map((src,i) =>
+    `<div class="preview-img-wrap"><img src="${src}" class="preview-img">
+    <button class="preview-img-rm" onclick="existingImages.splice(${i},1);renderExistingImages()">×</button></div>`
   ).join('');
 }
 
@@ -1061,75 +673,59 @@ function openModal(id = null) {
   const username = document.getElementById('username').value.trim();
   if (!username && !id) {
     const el = document.getElementById('username');
-    el.focus();
-    el.style.borderColor = 'var(--danger)';
-    el.placeholder = 'Najprej vnesi ime!';
-    setTimeout(() => { el.style.borderColor = ''; el.placeholder = 'Tvoje ime...'; }, 2500);
+    el.focus(); el.style.borderColor='var(--danger)'; el.placeholder='Najprej vnesi ime!';
+    setTimeout(()=>{ el.style.borderColor=''; el.placeholder='Tvoje ime...'; }, 2500);
     showToast('Najprej vnesi svoje ime! 👆', 'error');
     return;
   }
-  editingId = id; selectedCat = null; pendingImages = []; pendingTickets = []; existingImages = [];
-  coordsFromUrl = null; customEmojiOverride = null;
-  ['fName','fDesc','fUrl','fPrice','fVisitDate','fWebsite'].forEach(k => { const el = document.getElementById(k); if (el) el.value = ''; });
+  editingId=id; selectedCat=null; pendingImages=[]; pendingTickets=[]; existingImages=[]; coordsFromUrl=null; customEmojiOverride=null;
+  ['fName','fDesc','fUrl','fPrice','fVisitDate','fWebsite'].forEach(k=>{ const el=document.getElementById(k); if(el) el.value=''; });
   document.getElementById('coordsPreview').classList.remove('show');
-  document.getElementById('previewImgs').innerHTML = '';
-  document.getElementById('existingImgs').innerHTML = '';
-  document.getElementById('previewTickets').innerHTML = '';
-  document.getElementById('convertHint').innerHTML = '';
-  document.getElementById('fAddedByWrap').style.display = id ? '' : 'none';
+  document.getElementById('previewImgs').innerHTML='';
+  document.getElementById('existingImgs').innerHTML='';
+  document.getElementById('previewTickets').innerHTML='';
+  document.getElementById('convertHint').innerHTML='';
+  document.getElementById('fAddedByWrap').style.display=id?'':'none';
 
   if (id) {
     const p = places.find(x=>x.id===id);
-    document.getElementById('modalTitle').textContent = '✏️ Uredi kraj';
-    document.getElementById('fName').value = p.name;
-    document.getElementById('fDesc').value = p.description||'';
-    document.getElementById('fUrl').value = p.maps_url||'';
-    document.getElementById('fVisitDate').value = p.visit_date||'';
-    document.getElementById('fWebsite').value = p.website||'';
-    // Parse stored price like "Rp 50000" or "€ 15"
+    document.getElementById('modalTitle').textContent='✏️ Uredi kraj';
+    document.getElementById('fName').value=p.name;
+    document.getElementById('fDesc').value=p.description||'';
+    document.getElementById('fUrl').value=p.maps_url||'';
+    document.getElementById('fVisitDate').value=p.visit_date||'';
+    document.getElementById('fWebsite').value=p.website||'';
+    document.getElementById('fAddedBy').value=p.added_by||'';
     if (p.price) {
-      const m = p.price.match(/^(Rp|€)\s*(.+)$/);
-      if (m) { selectedCurrency = m[1]; document.getElementById('fPrice').value = m[2]; }
-      else { document.getElementById('fPrice').value = p.price; selectedCurrency = 'Rp'; }
-    } else { selectedCurrency = 'Rp'; }
-    document.getElementById('btnRp').classList.toggle('active', selectedCurrency === 'Rp');
-    document.getElementById('btnEur').classList.toggle('active', selectedCurrency === '€');
+      const m=p.price.match(/^(Rp|€)\s*(.+)$/);
+      if(m){ selectedCurrency=m[1]; document.getElementById('fPrice').value=m[2]; }
+      else { document.getElementById('fPrice').value=p.price; selectedCurrency='Rp'; }
+    } else { selectedCurrency='Rp'; }
+    document.getElementById('btnRp').classList.toggle('active', selectedCurrency==='Rp');
+    document.getElementById('btnEur').classList.toggle('active', selectedCurrency==='€');
     updateConvertHint();
-    selectedCat = p.category;
-    const cat = getCat(p.category);
-    if (cat?.customEmoji && p.custom_category) customEmojiOverride = p.custom_category;
-    if (p.lat) { coordsFromUrl={lat:p.lat,lng:p.lng}; document.getElementById('coordsPreview').textContent=`📍 ${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}`; document.getElementById('coordsPreview').classList.add('show'); }
-    document.getElementById('fAddedBy').value = p.added_by || '';
-    existingImages = [...(p.images || [])];
+    selectedCat=p.category;
+    const cat=getCat(p.category);
+    if(cat?.customEmoji && p.custom_category) customEmojiOverride=p.custom_category;
+    if(p.lat){ coordsFromUrl={lat:p.lat,lng:p.lng}; document.getElementById('coordsPreview').textContent=`📍 ${p.lat.toFixed(5)}, ${p.lng.toFixed(5)}`; document.getElementById('coordsPreview').classList.add('show'); }
+    existingImages=[...(p.images||[])];
     renderExistingImages();
   } else {
-    document.getElementById('modalTitle').textContent = '✚ Dodaj kraj';
-    selectedCurrency = 'Rp';
+    document.getElementById('modalTitle').textContent='✚ Dodaj kraj';
+    selectedCurrency='Rp';
     document.getElementById('btnRp').classList.add('active');
     document.getElementById('btnEur').classList.remove('active');
   }
   renderCatGrid();
   document.getElementById('modalOverlay').classList.add('open');
-  setTimeout(() => document.getElementById('fName').focus(), 100);
-}
-
-function renderExistingImages() {
-  document.getElementById('existingImgs').innerHTML = existingImages.map((src, i) =>
-    `<div class="preview-img-wrap">
-      <img src="${src}" class="preview-img">
-      <button class="preview-img-rm" onclick="existingImages.splice(${i},1);renderExistingImages()">×</button>
-    </div>`
-  ).join('');
+  setTimeout(()=>document.getElementById('fName').focus(), 100);
 }
 
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
-  editingId = null; selectedCat = null; pendingImages = []; pendingTickets = [];
+  editingId=null; selectedCat=null; pendingImages=[]; pendingTickets=[];
 }
-
-function closeModalIfOutside(e) {
-  if (e.target === document.getElementById('modalOverlay')) closeModal();
-}
+function closeModalIfOutside(e) { if(e.target===document.getElementById('modalOverlay')) closeModal(); }
 
 // ─── Submit ───────────────────────────────────────────────────────────────────
 async function submitPlace() {
@@ -1149,77 +745,59 @@ async function submitPlace() {
   if (!selectedCat) { showToast('Izberi kategorijo!', 'error'); return; }
 
   const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Shranjujem...';
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Shranjujem...';
 
   try {
+    // Upload new images
+    const newImageUrls = await Promise.all(pendingImages.map(uploadFile));
+    const allImages = [...existingImages, ...newImageUrls];
+
+    // Upload new tickets
+    const newTickets = await Promise.all(pendingTickets.map(async f => {
+      const url = await uploadFile(f);
+      return { name: f.name, url };
+    }));
+
     const body = {
-      name, category: selectedCat,
-      description: desc,
-      maps_url: url,
-      lat: coordsFromUrl?.lat || null,
-      lng: coordsFromUrl?.lng || null,
-      price,
-      custom_category: customEmojiOverride || null,
-      visit_date: visitDate || null,
-      website: website || '',
-      added_by: username,
+      name, category: selectedCat, description: desc, maps_url: url,
+      lat: coordsFromUrl?.lat || null, lng: coordsFromUrl?.lng || null,
+      price, custom_category: customEmojiOverride || null,
+      visit_date: visitDate || null, website: website || '',
+      added_by: username, images: allImages,
     };
 
     let place;
     if (editingId) {
-      const r = await fetch(`/api/places/${editingId}`, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({...body, images: existingImages}) });
-      if (!r.ok) throw new Error(await r.text());
-      place = await r.json();
+      const p = places.find(x=>x.id===editingId);
+      const existingTickets = p?.tickets || [];
+      const { data, error } = await sb.from('places').update({ ...body, tickets: [...existingTickets, ...newTickets] }).eq('id', editingId).select().single();
+      if (error) throw new Error(error.message);
+      place = data;
       removeMarker(editingId);
-      places = places.map(p => p.id === editingId ? place : p);
+      places = places.map(p => p.id===editingId ? place : p);
     } else {
-      const r = await fetch('/api/places', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
-      if (!r.ok) throw new Error(await r.text());
-      place = await r.json();
+      const { data, error } = await sb.from('places').insert({ ...body, tickets: newTickets }).select().single();
+      if (error) throw new Error(error.message);
+      place = data;
       places.unshift(place);
-    }
-
-    if (pendingImages.length) {
-      const fd = new FormData();
-      pendingImages.forEach(f => fd.append('images', f));
-      const ir = await fetch(`/api/places/${place.id}/images`, { method:'POST', body:fd });
-      if (!ir.ok) throw new Error(await ir.text());
-      const { images } = await ir.json();
-      place.images = images;
-      places = places.map(p => p.id === place.id ? { ...p, images } : p);
-    }
-
-    if (pendingTickets.length) {
-      const fd = new FormData();
-      pendingTickets.forEach(f => fd.append('tickets', f));
-      const tr = await fetch(`/api/places/${place.id}/tickets`, { method:'POST', body:fd });
-      if (!tr.ok) throw new Error(await tr.text());
-      const { tickets } = await tr.json();
-      place.tickets = tickets;
-      places = places.map(p => p.id === place.id ? { ...p, tickets } : p);
     }
 
     addMarker(place);
     renderList();
     closeModal();
     showToast('Kraj shranjen! 🌴', 'success');
-    if (place.lat) {
-      map.flyTo([place.lat, place.lng], 14, { duration:1 });
-      setTimeout(() => markers[place.id]?.openPopup(), 1100);
-    }
+    if (place.lat) { map.flyTo([place.lat, place.lng], 14, { duration:1 }); setTimeout(()=>markers[place.id]?.openPopup(), 1100); }
   } catch(e) {
     console.error(e);
     showToast('Napaka: ' + e.message, 'error');
   } finally {
-    btn.disabled = false;
-    btn.textContent = 'Shrani kraj';
+    btn.disabled=false; btn.textContent='Shrani kraj';
   }
 }
 
 async function deletePlace(id) {
   if (!confirm('Izbriši ta kraj?')) return;
-  await fetch(`/api/places/${id}`, { method:'DELETE' });
+  await sb.from('places').delete().eq('id', id);
   places = places.filter(p=>p.id!==id);
   removeMarker(id);
   renderList();
@@ -1230,36 +808,46 @@ async function deletePlace(id) {
 let toastTimer;
 function showToast(msg, type='') {
   const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = `toast ${type} show`;
+  el.textContent=msg; el.className=`toast ${type} show`;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+  toastTimer = setTimeout(()=>el.classList.remove('show'), 3200);
 }
 
-// ─── Polling ──────────────────────────────────────────────────────────────────
-async function fetchPlaces() {
-  try {
-    const r = await fetch('/api/places');
-    const data = await r.json();
-    const prevIds = new Set(places.map(p=>p.id));
-    const newIds = new Set(data.map(p=>p.id));
-    prevIds.forEach(id => { if (!newIds.has(id)) removeMarker(id); });
-    data.forEach(p => { if (!prevIds.has(p.id)) { addMarker(p); if(places.length>0) showToast(`🌴 ${p.added_by||'Nekdo'} dodal: ${p.name}`); } });
-    places = data;
-    renderList();
-  } catch(e) { console.error(e); }
+// ─── Data loading ─────────────────────────────────────────────────────────────
+async function fetchAll() {
+  const [{ data: placesData }, { data: heartsRaw }] = await Promise.all([
+    sb.from('places').select('*').order('created_at', { ascending: false }),
+    sb.from('hearts').select('place_id, username'),
+  ]);
+
+  // Build hearts map
+  const newHearts = {};
+  (heartsRaw||[]).forEach(h => {
+    if (!newHearts[h.place_id]) newHearts[h.place_id] = [];
+    newHearts[h.place_id].push(h.username);
+  });
+  heartsData = newHearts;
+
+  const prevIds = new Set(places.map(p=>p.id));
+  const newIds = new Set((placesData||[]).map(p=>p.id));
+  prevIds.forEach(id => { if(!newIds.has(id)) removeMarker(id); });
+  (placesData||[]).forEach(p => {
+    if (!prevIds.has(p.id)) {
+      addMarker(p);
+      if (places.length > 0) showToast(`🌴 ${p.added_by||'Nekdo'} dodal: ${p.name}`);
+    } else {
+      // update marker icon in case it changed
+      removeMarker(p.id);
+      addMarker(p);
+    }
+  });
+  places = placesData || [];
+  renderList();
 }
 
-// ─── Mobile drawer ────────────────────────────────────────────────────────────
-function toggleDrawer() {
-  document.getElementById('sidebar').classList.toggle('open');
-}
-
-// Close drawer when clicking a card on mobile
+function toggleDrawer() { document.getElementById('sidebar').classList.toggle('open'); }
 document.addEventListener('click', e => {
-  if (e.target.closest('.place-card') && window.innerWidth <= 768) {
-    document.getElementById('sidebar').classList.remove('open');
-  }
+  if (e.target.closest('.place-card') && window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
 });
 
 async function init() {
@@ -1267,8 +855,8 @@ async function init() {
   if (saved) document.getElementById('username').value = saved;
   document.getElementById('username').addEventListener('input', e => localStorage.setItem('bali_username', e.target.value));
   renderFilters();
-  await fetchPlaces();
-  setInterval(fetchPlaces, 5000);
+  await fetchAll();
+  setInterval(fetchAll, 5000);
 }
 
 init();
