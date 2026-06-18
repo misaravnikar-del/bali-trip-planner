@@ -1,148 +1,119 @@
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
-  const { url } = req.body || {};
+  let { url } = req.body || {};
   if (!url) return res.json({});
 
-  const HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-    'Accept-Language': 'en-US,en;q=0.5',
-  };
+  // Strip app-specific params that break web redirects
+  try {
+    const u = new URL(url);
+    u.searchParams.delete('g_st');
+    u.searchParams.delete('entry');
+    url = u.toString();
+  } catch {}
 
-  function extractCoords(u) {
+  const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+
+  function coords(u) {
     let m;
     m = u.match(/!3d(-?\d+\.?\d+)!4d(-?\d+\.?\d+)/);
-    if (m) return { lat: parseFloat(m[1]), lng: parseFloat(m[2]) };
-    m = u.match(/@(-?\d+\.?\d+),(-?\d+\.?\d+),[\d.]+z/);
-    if (m) return { lat: parseFloat(m[1]), lng: parseFloat(m[2]) };
-    m = u.match(/[?&]q=(-?\d+\.?\d+),(-?\d+\.?\d+)/);
-    if (m) return { lat: parseFloat(m[1]), lng: parseFloat(m[2]) };
-    m = u.match(/[?&]ll=(-?\d+\.?\d+),(-?\d+\.?\d+)/);
-    if (m) return { lat: parseFloat(m[1]), lng: parseFloat(m[2]) };
+    if (m) return { lat: +m[1], lng: +m[2] };
+    m = u.match(/@(-?\d+\.\d+),(-?\d+\.\d+),[\d.]+z/);
+    if (m) return { lat: +m[1], lng: +m[2] };
+    m = u.match(/[?&]q=(-?\d+\.\d+),(-?\d+\.\d+)/);
+    if (m) return { lat: +m[1], lng: +m[2] };
+    m = u.match(/[?&]ll=(-?\d+\.\d+),(-?\d+\.\d+)/);
+    if (m) return { lat: +m[1], lng: +m[2] };
     return null;
   }
 
-  function extractName(u) {
+  function name(u) {
     try {
-      const m = u.match(/\/maps\/place\/([^/@?&+][^/@?]*)/);
-      if (m) {
-        const raw = m[1].split('/')[0];
-        return decodeURIComponent(raw.replace(/\+/g, ' ')).trim();
-      }
+      const m = u.match(/\/maps\/place\/([^/@?&+][^/@?+]*)/);
+      if (m) return decodeURIComponent(m[1].split('/')[0].replace(/\+/g, ' ')).trim();
     } catch {}
     return null;
   }
 
-  function extractCoordsFromHtml(html) {
+  function coordsHtml(html) {
     let m;
-    // APP_INITIALIZATION_STATE format: [null,null,lat,lng]
+    // Canonical / og:url containing @lat,lng
+    m = html.match(/google\.com\/maps\/[^"']*@(-?\d+\.\d+),(-?\d+\.\d+)/);
+    if (m) return { lat: +m[1], lng: +m[2] };
+    // APP_INITIALIZATION_STATE
     m = html.match(/\[null,null,(-?\d+\.\d+),(-?\d+\.\d+)\]/);
-    if (m) return { lat: parseFloat(m[1]), lng: parseFloat(m[2]) };
-    // meta canonical URL
-    m = html.match(/content="https:\/\/www\.google\.com\/maps\/place\/[^"]*@(-?\d+\.\d+),(-?\d+\.\d+)/);
-    if (m) return { lat: parseFloat(m[1]), lng: parseFloat(m[2]) };
-    // og:url or canonical with @lat,lng
-    m = html.match(/["']https:\/\/(?:www\.)?google\.com\/maps[^"']*@(-?\d+\.\d+),(-?\d+\.\d+)/);
-    if (m) return { lat: parseFloat(m[1]), lng: parseFloat(m[2]) };
-    // JSON-like coordinates in page data (Bali-specific range: lat -9 to -8, lng 114 to 116)
-    m = html.match(/(-8\.\d{4,}),(-?\d+),\s*(11[45]\.\d{4,})/);
-    if (m) return { lat: parseFloat(m[1]), lng: parseFloat(m[3]) };
-    m = html.match(/"(-8\.\d{4,})","(11[45]\.\d{4,})"/);
-    if (m) return { lat: parseFloat(m[1]), lng: parseFloat(m[2]) };
-    // Generic lat/lng pattern in JS data
-    m = html.match(/[",\[](-?\d+\.\d{5,})[",\]],[",\[](-?\d+\.\d{5,})/);
+    if (m) return { lat: +m[1], lng: +m[2] };
+    // window.APP_INITIALIZATION_STATE or similar JSON blobs
+    m = html.match(/"(-?\d+\.\d{5,})","(-?\d+\.\d{5,})"/g);
     if (m) {
-      const a = parseFloat(m[1]), b = parseFloat(m[2]);
-      // Bali is around -8.5, 115
-      if (a > -10 && a < -7 && b > 113 && b < 117) return { lat: a, lng: b };
-      if (b > -10 && b < -7 && a > 113 && a < 117) return { lat: b, lng: a };
+      for (const s of m) {
+        const p = s.match(/"(-?\d+\.\d{5,})","(-?\d+\.\d{5,})"/);
+        if (p) {
+          const a = +p[1], b = +p[2];
+          if (a > -90 && a < 90 && b > -180 && b < 180 && !(a === 0 && b === 0)) {
+            return { lat: a, lng: b };
+          }
+        }
+      }
     }
     return null;
   }
 
-  function extractNameFromHtml(html) {
+  function nameHtml(html) {
     let m;
-    m = html.match(/<title>([^<]+) - Google Maps<\/title>/);
+    m = html.match(/<title>([^<|]+)/);
+    if (m && !m[1].includes('Google Maps')) return m[1].trim();
+    m = html.match(/<title>([^<]+) - Google Maps/);
     if (m) return m[1].trim();
-    m = html.match(/<meta property="og:title" content="([^"]+)"/);
+    m = html.match(/<meta[^>]+property="og:title"[^>]+content="([^"]+)"/);
     if (m) return m[1].trim();
     return null;
   }
 
-  try {
-    // Step 1: manually follow redirects to capture each hop
-    let currentUrl = url;
-    let finalUrl = url;
-    const visited = new Set();
+  // Follow redirects manually, checking each hop
+  async function resolve(startUrl) {
+    let cur = startUrl;
+    const seen = new Set();
 
-    for (let i = 0; i < 8; i++) {
-      if (visited.has(currentUrl)) break;
-      visited.add(currentUrl);
+    for (let i = 0; i < 10; i++) {
+      if (seen.has(cur)) break;
+      seen.add(cur);
 
-      const controller = new AbortController();
-      const t = setTimeout(() => controller.abort(), 6000);
+      const c = coords(cur);
+      if (c) return { ...c, name: name(cur) };
 
       let resp;
       try {
-        resp = await fetch(currentUrl, {
-          method: 'GET',
+        const ctrl = new AbortController();
+        const t = setTimeout(() => ctrl.abort(), 7000);
+        resp = await fetch(cur, {
           redirect: 'manual',
-          headers: HEADERS,
-          signal: controller.signal,
+          headers: { 'User-Agent': UA, 'Accept': 'text/html', 'Accept-Language': 'en-US,en;q=0.9' },
+          signal: ctrl.signal,
         });
-      } finally {
         clearTimeout(t);
-      }
+      } catch { break; }
 
-      const location = resp.headers.get('location');
-      finalUrl = currentUrl;
-
-      // Check if current URL already has coords
-      const earlyCoords = extractCoords(currentUrl);
-      if (earlyCoords) {
-        return res.json({ ...earlyCoords, name: extractName(currentUrl) });
-      }
-
-      if (location) {
-        currentUrl = location.startsWith('http') ? location : new URL(location, currentUrl).href;
-        // Check redirect target for coords immediately
-        const redirectCoords = extractCoords(currentUrl);
-        if (redirectCoords) {
-          return res.json({ ...redirectCoords, name: extractName(currentUrl) });
-        }
+      const loc = resp.headers.get('location');
+      if (loc) {
+        cur = loc.startsWith('http') ? loc : new URL(loc, cur).href;
         continue;
       }
 
-      // No more redirects — read the HTML
-      if (resp.status >= 200 && resp.status < 400) {
-        const html = await resp.text().catch(() => '');
-        const coordsHtml = extractCoordsFromHtml(html);
-        const nameHtml = extractNameFromHtml(html) || extractName(currentUrl);
-        if (coordsHtml) return res.json({ ...coordsHtml, name: nameHtml });
-        return res.json({ name: nameHtml });
-      }
-      break;
-    }
+      // Final page — read HTML
+      const html = await resp.text().catch(() => '');
 
-    // Fallback: try auto-follow
-    const controller2 = new AbortController();
-    const t2 = setTimeout(() => controller2.abort(), 6000);
-    try {
-      const r2 = await fetch(url, { method: 'GET', redirect: 'follow', headers: HEADERS, signal: controller2.signal });
-      clearTimeout(t2);
-      const fu = r2.url;
-      const c = extractCoords(fu);
-      const n = extractName(fu);
-      if (c) return res.json({ ...c, name: n });
-      const html2 = await r2.text().catch(() => '');
-      const ch = extractCoordsFromHtml(html2);
-      const nh = extractNameFromHtml(html2) || n;
-      if (ch) return res.json({ ...ch, name: nh });
-      return res.json({ name: nh });
-    } finally {
-      clearTimeout(t2);
+      // Check for meta-refresh redirect
+      const mr = html.match(/<meta[^>]+http-equiv="refresh"[^>]+content="[^"]*url=([^"']+)/i)
+                || html.match(/window\.location\s*=\s*["']([^"']+)/);
+      if (mr) { cur = mr[1].startsWith('http') ? mr[1] : new URL(mr[1], cur).href; continue; }
+
+      const ch = coordsHtml(html);
+      const nh = nameHtml(html) || name(cur);
+      return ch ? { ...ch, name: nh } : { name: nh };
     }
-  } catch (e) {
-    return res.json({});
+    return {};
   }
+
+  const result = await resolve(url).catch(() => ({}));
+  res.json(result || {});
 }
