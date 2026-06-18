@@ -1,0 +1,17 @@
+{
+  "name": "bali-map",
+  "version": "1.0.0",
+  "description": "Bali trip planner with shared map",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "multer": "^2.0.1",
+    "ngrok": "^5.0.0-beta.2",
+    "uuid": "^11.0.0"
+  }
+}
