@@ -2,7 +2,6 @@
   "name": "bali-map",
   "version": "1.0.0",
   "description": "Bali trip planner with shared map",
-  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js"
